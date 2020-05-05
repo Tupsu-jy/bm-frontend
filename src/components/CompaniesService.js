@@ -1,27 +1,39 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:8080'
 //toteutus kesken mutta idea koossa
-/*let setCompanies = "";
+/*let companies = "";
 
-const setSetCompanies = (sc) => {
-    setCompanies = sc;
-    resetAll()
+const setCompanies=(appCompanies)=>{
+    companies=appCompanies
 }
 
-const resetAll = () => {
-    getAll()
-        .then(response => {
-            console.log(response)
-            setCompanies(response.data)
-        })
+function findUniqueId(){
+
 }
 */
 const getAll = () => {
     return axios.get(baseUrl + "/companies")
 }
 
-const create = newObject => {
-    return axios.post(baseUrl+"/create", newObject)
+const create = (name,business_id,street,postcode,city,email,phone,id) => {
+
+    axios.post(baseUrl+"/create",{
+        name: name,
+        business_id: business_id,
+        street: street,
+        postcode: postcode,
+        city: city,
+        email: email,
+        phone: phone,
+        id: id
+    })
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
 }
 
 const update = (id, newObject) => {

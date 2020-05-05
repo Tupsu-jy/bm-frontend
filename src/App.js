@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Choices from './components/Choices'
+import Validator from './components/Validator'
 import Create from './components/Create'
 import All from './components/All'
 import Search from './components/Search'
@@ -31,6 +31,7 @@ function App() {
     CompaniesService.getAll()
       .then(response => {
         setCompanies(response.data.rows)
+        Validator.setCompanies(response.data.rows)
       })
   }, [])
 
@@ -61,3 +62,4 @@ function App() {
 }
 
 export default App;
+

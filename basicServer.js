@@ -93,7 +93,7 @@ app.post('/create', function (req, res)  {
             if (err) throw err;
             console.log(result);
         });
-    res.redirect('/index');
+    res.json("")
 });
 
 //GET COMPANY BY ID
