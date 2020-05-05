@@ -18,7 +18,9 @@ const Create = (props) => {
 
         let answer=Validator.validate(name,business_id,street,postcode,city,email,phone)
         if(answer==""){
-            CompaniesService.create(name,business_id,street,postcode,city,email,phone)
+            let id=Validator.createUniqueId()
+            CompaniesService.create(name,business_id,street,postcode,city,email,phone,id)
+            props.addCompany(name,business_id,street,postcode,city,email,phone,id)
         }else{
             alert(answer)
         }

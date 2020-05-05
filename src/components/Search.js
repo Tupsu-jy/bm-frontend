@@ -5,24 +5,20 @@ import Headers from './Headers';
 
 
 const Search = (props) => {
-    const [name, setName] = useState('')
-    const [filteredCompanies, setFilteredCompanies] = useState([])
+
     const { companies } = props;
 
+    const [filteredCompanies, setFilteredCompanies] = useState(companies);
 
-
-
-    useEffect(() => {
-        showFiltered()
-    }, [name]);//tähän lisää useStateja jos tahdotaan lissää hakuarvoi
-
-    const showFiltered =()=> {
-        console.log(name)
+    const showFilteredByName =(name)=> {
         setFilteredCompanies(companies.filter(company => company.name.toLowerCase().includes(name)))
-        //tähän kaikki fillteröinti? tyyliin lisää saman moisia
     }
-
-
+    const showFilteredByCity =(city)=> {
+        setFilteredCompanies(companies.filter(company => company.city.toLowerCase().includes(city)))
+    }
+    const showFilteredById =(id)=> {
+        setFilteredCompanies(companies.filter(company => company.business_id.includes(id)))
+    }
     if (!props.show) {
         return null
     }
@@ -30,7 +26,15 @@ const Search = (props) => {
         <div>
             <p>search by name:</p>
             <input
-                onChange={e => setName(e.target.value.toLowerCase())}
+                onChange={e => showFilteredByName(e.target.value.toLowerCase())}
+            />
+            <p>search by city:</p>
+            <input
+                onChange={e => showFilteredByCity(e.target.value.toLowerCase())}
+            />
+            <p>search by business id:</p>
+            <input
+                onChange={e => showFilteredById(e.target.value)}
             />
             <table class="table table-bordered">
                 <thead>

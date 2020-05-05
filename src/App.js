@@ -13,11 +13,30 @@ import Card from './components/Card';
 function App() {
   const [page, setPage] = useState('all')
   const [companies, setCompanies] = useState([])
-  const [companyUpdate, setCompanyUpdate] = useState('all')
-
+  const [companyUpdate, setCompanyUpdate] = useState('')
+console.log(page)
   const updateButton = (company) => {
     setPage('update')
     setCompanyUpdate(company)
+  }
+
+
+
+  const addCompany = (name,business_id,street,postcode,city,email,phone,id) => {
+    const company = {
+      business_id: business_id,
+      city: city,
+      email: email,
+      id: id,
+      name: name,
+      phone: phone,
+      postcode: postcode,
+      street: street
+    }
+    setCompanies(
+      companies
+      .filter(comp => comp.id != id)
+      .concat(company))
   }
 
   const removeCompany = (id) => {
@@ -43,13 +62,14 @@ function App() {
 
       <nav class="navbar navbar-expand-sm navbar-dark">
 
-        <a class="navbar-brand" onClick={()=>setPage("")}><h2>Business Manager</h2></a>
+        <a class="navbar-brand" onClick={() => setPage("")}><h2>Business Manager</h2></a>
       </nav>
       <Card
         setPage={setPage}
         page={page}
         companies={companies}
         removeCompany={removeCompany}
+        addCompany={addCompany}
         updateButton={updateButton}
         company={companyUpdate}
       />

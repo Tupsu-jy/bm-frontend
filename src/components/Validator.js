@@ -12,13 +12,13 @@ const setCompanies = (appCompanies) => {
 
 
 function lengthTest(min, max, str){
-    if(str.length<max && str.length>min)
+    if(str.length<=max && str.length>=min)
         return true
     else
         return false
 }
 
-function validate(name, business_id, street, postcode, city, email, phone) {
+function validate(name, business_id, street, postcode, city, email, phone, update) {
     let answer = ""
 
     if(name=="" || business_id=="" || street=="" || postcode=="" || city=="" || email=="" || phone=="")
@@ -27,7 +27,6 @@ function validate(name, business_id, street, postcode, city, email, phone) {
     if(!lengthTest(3,60,name))
         answer = answer.concat("Company name has to between 3-60 characters long\n")
 
-    
     if(!regBid.test(business_id))
         answer = answer.concat("Business id has to be in format '1234567-8'\n")
 
@@ -46,6 +45,14 @@ function validate(name, business_id, street, postcode, city, email, phone) {
     if(!regPhone.test(phone))
         answer = answer.concat("Not a valid phone number\n")
 
+    if(update)
+    answer = answer.concat(uniquenessTest(name,business_id))
+
+    return answer
+}
+
+function uniquenessTest(name,business_id){
+    let answer=""
     for (let i = 0; i < companies.length; i++) {
         if (name == companies[i].name)
             answer = answer.concat("Name already in database\n")
@@ -55,7 +62,20 @@ function validate(name, business_id, street, postcode, city, email, phone) {
     return answer
 }
 
+function createUniqueId(){
+    if(companies.length==0)
+        return 1
+
+    let biggest=companies[0].id
+    for (let i = 1; i < companies.length; i++) {
+        if(companies[i].id>biggest)
+            biggest=companies[i].id
+    }
+    return biggest+1
+}
+
 export default {
     setCompanies: setCompanies,
-    validate: validate
+    validate: validate,
+    createUniqueId:createUniqueId
 }

@@ -36,8 +36,23 @@ const create = (name,business_id,street,postcode,city,email,phone,id) => {
 
 }
 
-const update = (id, newObject) => {
-    return axios.put(`${baseUrl}/${id}`, newObject)
+const update = (name,business_id,street,postcode,city,email,phone,id) => {
+    axios.post(baseUrl+"/update",{
+        name: name,
+        business_id: business_id,
+        street: street,
+        postcode: postcode,
+        city: city,
+        email: email,
+        phone: phone,
+        id: id
+    })
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
 }
 
 const del = (id) => {

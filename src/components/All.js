@@ -3,6 +3,7 @@ import Company from './Company';
 import Headers from './Headers';
 
 const All = (props) => {
+    console.log(props.companies)
     const {companies}=props;
 
     if (!props.show) {
