@@ -1,19 +1,15 @@
 let companies = ""
 var regBid = new RegExp('\\d{7}-\\d$');
 var regPC = new RegExp('\\d{5,10}$');
-let re='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
-var regEmail=new RegExp(re);
-console.log(regEmail)
+let re=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 let rp='^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{3,50}$'
 var regPhone=new RegExp(rp)
-console.log(regPhone)
 
 const setCompanies = (appCompanies) => {
     console.log("setter" + appCompanies)
     companies = appCompanies
 }
-//name,business_id,street,postcode,city,email,phone,id
-//1234567-8
+
 
 function lengthTest(min, max, str){
     if(str.length<max && str.length>min)
@@ -21,11 +17,7 @@ function lengthTest(min, max, str){
     else
         return false
 }
-/*
-function onlyNumbersTest(str){
-    return reg.test(str)
-}
-*/
+
 function validate(name, business_id, street, postcode, city, email, phone) {
     let answer = ""
 
@@ -35,7 +27,7 @@ function validate(name, business_id, street, postcode, city, email, phone) {
     if(!lengthTest(3,60,name))
         answer = answer.concat("Company name has to between 3-60 characters long\n")
 
-    console.log(business_id+"  "+regBid.test(business_id)+"  "+regBid)
+    
     if(!regBid.test(business_id))
         answer = answer.concat("Business id has to be in format '1234567-8'\n")
 
@@ -48,7 +40,7 @@ function validate(name, business_id, street, postcode, city, email, phone) {
     if(!lengthTest(3,60,city))
         answer = answer.concat("City name has to between 3-60 characters long\n")    
 
-    if(!regEmail.test(email))
+    if(!re.test(email))
         answer = answer.concat("Not a valid email\n")
 
     if(!regPhone.test(phone))
