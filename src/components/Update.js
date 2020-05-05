@@ -32,7 +32,7 @@ const Update = (props) => {
 
     return (
         <>
-        <h3>Create New Company</h3>
+        <h3>Update Company</h3>
 
         <div class="form-row" hidden="true">
             <div class="form-group col-md-2">

@@ -33,6 +33,8 @@ console.log(page)
       postcode: postcode,
       street: street
     }
+    setPage('')
+
     setCompanies(
       companies
       .filter(comp => comp.id != id)

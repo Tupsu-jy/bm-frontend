@@ -41,12 +41,14 @@ const Card = (props) => {
                         <Create
                             show={props.page === 'create'}
                             addCompany={props.addCompany}
+                            setPage={props.setPage}
                         />
     
                         <Update
                             show={props.page === 'update'}
                             company={props.company}
                             addCompany={props.addCompany}
+                            setPage={props.setPage}
                         />
                     </div></div>
             </div>
