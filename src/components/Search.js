@@ -32,7 +32,7 @@ const Search = (props) => {
             <input
                 onChange={e => setName(e.target.value.toLowerCase())}
             />
-            <table class="table table bordered">
+            <table class="table table-bordered">
                 <thead>
                     <Headers />
                 </thead>

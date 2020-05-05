@@ -7,54 +7,55 @@ const Update = (props) => {
     }
 
     return (
-        <div className="row">
-            <div className="col-md-6 offset-md-3">
-                <h1>Create New Company</h1>
-                <form action="http://127.0.0.1:8080/update" method="POST">
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label>Company Name</label>
-                            <input type="text" className="form-control" name="name" placeholder="Company Name" defaultValue={props.company.name}/>
-                        </div>
-                        <div className="form-group col-md-6">
-                            <label>Business ID</label>
-                            <input type="text" className="form-control" name="business_id" placeholder="Business ID"  defaultValue={props.company.business_id}/>
-                        </div>
+        <>
+            <h3>Create New Company</h3>
+            <form action="http://127.0.0.1:8080/create" method="POST">
+                <div class="form-row" hidden="">
+                    <div class="form-group col-md-2">
+                        <label>ID</label>
+                        <input type="text" id="id" class="form-control" name="id" placeholder="ID" value="4" />
                     </div>
-                    <div className="form-group">
-                        <label>Street</label>
-                        <input type="text" className="form-control" name="street" placeholder="Street"  defaultValue={props.company.street}/>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Company Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Company Name" value={props.company.name} />
                     </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label>Postcode</label>
-                            <input type="text" className="form-control" name="postcode" placeholder="Postcode"  defaultValue={props.company.postcode}/>
-                        </div>
-                        <div className="form-group col-md-6">
-                            <label>City</label>
-                            <input type="text" className="form-control" name="city" placeholder="City"  defaultValue={props.company.city}/>
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label>Business ID</label>
+                        <input type="text" class="form-control" name="business_id" placeholder="Business ID"  value={props.company.business_id}/>
                     </div>
-                    <div className="form-group">
+                </div>
+                <div class="form-group">
+                    <label>Street</label>
+                    <input type="text" class="form-control" name="street" placeholder="Street"  value={props.company.street}/>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Postcode</label>
+                        <input type="text" class="form-control" name="postcode" placeholder="Postcode"  value={props.company.postcode}/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>City</label>
+                        <input type="text" class="form-control" name="city" placeholder="City"  value={props.company.city}/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
                         <label>Email</label>
-                        <input type="email" className="form-control" name="email" placeholder="Email"  value={props.company.email}/>
+                        <input type="email" class="form-control" name="email" placeholder="Email"  value={props.company.email}/>
                     </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <label>Phone number</label>
-                            <input type="text" className="form-control" name="phone" placeholder="Phone number"  value={props.company.phone}/>
-                        </div>
-                        <div className="form-group col-md-6">
-                            <label>ID</label>
-                            <input type="text" className="form-control" name="id" placeholder="ID"  value={props.company.id}/>
-                        </div>
+                    <div class="form-group col-md-6">
+                        <label>Phone number</label>
+                        <input type="text" class="form-control" name="phone" placeholder="Phone number"  value={props.company.phone}/>
                     </div>
-                    <div className="form-group">
-                        <button type="submit" className="btn btn-info"><i className="fa fa-database"></i>Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                </div>
+            </form>
+        </>
     )
 }
 

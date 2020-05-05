@@ -14,10 +14,10 @@ const Company = (props) => {
             <td>{props.company.email}</td>
             <td>{props.company.phone}</td>
             <td>
-                <button onClick={()=>props.updateButton(props.company)}>
+                <button class="btn btn-sm btn-info" type="btn" role="button" onClick={()=>props.updateButton(props.company)}>
                     UPDATE
                 </button>
-                <button onClick={()=>props.removeCompany(props.company.id)}>
+                <button class="btn btn-sm btn-link" type="btn" role="button" onClick={()=>props.removeCompany(props.company.id)}>
                     DELETE
                 </button>
             </td>
@@ -26,3 +26,5 @@ const Company = (props) => {
 }
 
 export default Company
+//<a class="btn btn-sm btn-link" type="btn" role="button" href="http://127.0.0.1:8080/delete/2">Delete</a>
+//<a class="btn btn-sm btn-info" type="btn" role="button" href="http://127.0.0.1:8080/select/2/Techno Polis Oy/Karamalmintie 33/27640/Espoo/146789-9/techno.polis@gmail.com/050-4788766">Update</a>

@@ -6,6 +6,9 @@ import Search from './components/Search'
 import CompaniesService from './components/CompaniesService'
 import './App.css';
 import Update from './components/Update';
+import Card from './components/Card';
+
+
 
 function App() {
   const [page, setPage] = useState('all')
@@ -32,31 +35,27 @@ function App() {
   }, [])
 
   return (
+
+
+
     <div className="App">
-      <Choices setPage={setPage} />
 
-      <Create
-        show={page === 'create'}
-      />
+      <nav class="navbar navbar-expand-sm navbar-dark">
 
-      <Update
-        show={page === 'update'}
+        <a class="navbar-brand" onClick={()=>setPage("")}><h2>Business Manager</h2></a>
+      </nav>
+      <Card
+        setPage={setPage}
+        page={page}
+        companies={companies}
+        removeCompany={removeCompany}
+        updateButton={updateButton}
         company={companyUpdate}
       />
 
-      <All
-        show={page === 'all'}
-        companies={companies}
-        removeCompany={removeCompany}
-        updateButton={updateButton}
-      />
 
-      <Search
-        show={page === 'search'}
-        companies={companies}
-        removeCompany={removeCompany}
-        updateButton={updateButton}
-      />
+
+
     </div>
   );
 }
