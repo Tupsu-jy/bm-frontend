@@ -10,13 +10,13 @@ const Search = (props) => {
 
     const [filteredCompanies, setFilteredCompanies] = useState(companies);
 
-    const showFilteredByName =(name)=> {
+    const showFilteredByName = (name) => {
         setFilteredCompanies(companies.filter(company => company.name.toLowerCase().includes(name)))
     }
-    const showFilteredByCity =(city)=> {
+    const showFilteredByCity = (city) => {
         setFilteredCompanies(companies.filter(company => company.city.toLowerCase().includes(city)))
     }
-    const showFilteredById =(id)=> {
+    const showFilteredById = (id) => {
         setFilteredCompanies(companies.filter(company => company.business_id.includes(id)))
     }
     if (!props.show) {
@@ -24,18 +24,20 @@ const Search = (props) => {
     }
     return (
         <div>
-            <p>search by name:</p>
-            <input
-                onChange={e => showFilteredByName(e.target.value.toLowerCase())}
-            />
-            <p>search by city:</p>
-            <input
-                onChange={e => showFilteredByCity(e.target.value.toLowerCase())}
-            />
-            <p>search by business id:</p>
-            <input
-                onChange={e => showFilteredById(e.target.value)}
-            />
+            <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>Search by name</label>
+                <input onChange={e => showFilteredByName(e.target.value.toLowerCase())} type="text" class="form-control" name="street" placeholder="Street" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>Search by city</label>
+                <input onChange={e => showFilteredByCity(e.target.value.toLowerCase())} type="text" class="form-control" name="street" placeholder="Street" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>Search by id</label>
+                <input onChange={e => showFilteredById(e.target.value)} type="text" class="form-control" name="street" placeholder="Street" />
+            </div>
+            </div>
             <table class="table table-bordered">
                 <thead>
                     <Headers />
@@ -49,4 +51,17 @@ const Search = (props) => {
 }
 
 export default Search
-
+/*
+<p>search by name:</p>
+<input
+    onChange={e => showFilteredByName(e.target.value.toLowerCase())}
+/>
+<p>search by city:</p>
+<input
+    onChange={e => showFilteredByCity(e.target.value.toLowerCase())}
+/>
+<p>search by business id:</p>
+<input
+    onChange={e => showFilteredById(e.target.value)}
+/>
+*/
