@@ -27,15 +27,15 @@ const Search = (props) => {
             <div class="form-row">
             <div class="form-group col-md-3">
                 <label>Search by name</label>
-                <input onChange={e => showFilteredByName(e.target.value.toLowerCase())} type="text" class="form-control" name="street" />
+                <input onChange={e => showFilteredByName(e.target.value.toLowerCase())} type="text" class="form-control" />
             </div>
             <div class="form-group col-md-3">
                 <label>Search by city</label>
-                <input onChange={e => showFilteredByCity(e.target.value.toLowerCase())} type="text" class="form-control" name="street" />
+                <input onChange={e => showFilteredByCity(e.target.value.toLowerCase())} type="text" class="form-control" />
             </div>
             <div class="form-group col-md-3">
-                <label>Search by id</label>
-                <input onChange={e => showFilteredById(e.target.value)} type="text" class="form-control" name="street" />
+                <label>Search by business id</label>
+                <input onChange={e => showFilteredById(e.target.value)} type="text" class="form-control" />
             </div>
             </div>
             <table class="table table-bordered">
