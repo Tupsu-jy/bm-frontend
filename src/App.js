@@ -11,7 +11,7 @@ import Card from './components/Card';
 
 
 function App() {
-  const [page, setPage] = useState('all')
+  const [page, setPage] = useState('')
   const [companies, setCompanies] = useState([])
   const [companyUpdate, setCompanyUpdate] = useState('')
 console.log(page)
