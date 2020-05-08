@@ -2,7 +2,7 @@ var express = require('express');
 var cors = require('cors');
 // for sending html file
 var path = require('path');
-let ejs = require('ejs')
+let ejs = require('ejs');
 var app = express();
 app.use(cors());
 let bodyParser = require('body-parser');
@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 
 var mysql = require('mysql');
 
+/** Information required to MysQL connection.*/
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -26,16 +27,18 @@ var con = mysql.createConnection({
     multipleStatements: true
 });
 
+/** Connects to MySQL. */
 con.connect(function(err){
     if(err) throw err;
     console.log('Connected to MySQL!');
 });
 
+/** Redirect to index.html page.*/
 app.get('/index', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-//GET ALL COMPANIES
+/**Send all companies to the client in json format.*/
 app.get('/companies', function (req, res) {
     var alteredResult;
     var string;
@@ -50,6 +53,13 @@ app.get('/companies', function (req, res) {
     });
 });
 
+/**
+ * function getResult
+ * Send a request.
+ * @param {getResult} callback - The callback that handles the response from database.
+ * Selects all companies from database.
+ * @returns callback{null, string}
+ */
 var getResult = function(callback) {
         var sql = "SELECT * from companies";
         con.query(sql, function (err, result) {
@@ -59,7 +69,7 @@ var getResult = function(callback) {
         });
 };
 
-//GET NEXT ID
+/**Sends next free ID to the client when creating new company.*/
 app.get('/create', function (req, res) {
     var alteredResult2;
     var string2;
@@ -75,6 +85,13 @@ app.get('/create', function (req, res) {
     });
 });
 
+/**
+ * @function getMaxid
+ * Send a request.
+ * @param {getMaxid} callback - The callback that handles the response from database.
+ * Selects MAX id from database.
+ * @returns callback{null, string}
+ */
 var getMaxid = function(callback) {
     var sql = "SELECT MAX(id)+1 AS id FROM companies";
     con.query(sql, function (err, result) {
@@ -84,7 +101,8 @@ var getMaxid = function(callback) {
     });
 };
 
-//CREATE NEW COMPANY
+/** Creates new company
+ * Gets all data required from the client and puts it to database.*/
 app.post('/create', function (req, res)  {
     console.log(req)
         var sql = "INSERT INTO companies(id, name, street, postcode, city, business_id, email, phone)"
@@ -96,7 +114,7 @@ app.post('/create', function (req, res)  {
     res.json("")
 });
 
-//GET COMPANY BY ID
+/** Selects a company and gets company's data*/
 app.get('/select/:id/:name/:street/:postcode/:city/:business_id/:email/:phone', function (req, res){
     var companyId = req.params.id;
     var companyName = req.params.name;
@@ -116,6 +134,21 @@ app.get('/select/:id/:name/:street/:postcode/:city/:business_id/:email/:phone', 
     }});
 });
 
+/**
+ * @function getUpdate
+ * Send a request.
+ * @param {getUpdate} callback - The callback that handles the response from database.
+ * Selects all information about each company from database.
+ * @param {string} companyId
+ * @param {string} companyName
+ * @param {string} companyStreet
+ * @param {string} companyPostcode
+ * @param {string} companyCity
+ * @param {string} companyBusinessid
+ * @param {string} companyEmail
+ * @param {string} companyPhone
+ * @returns callback{null, string}
+ */
 var getUpdate = function(companyId, companyName, companyStreet, companyPostcode, companyCity,  companyBusinessid, companyEmail, companyPhone, callback) {
     var sql = "SELECT * from companies WHERE id = ? AND name = ? AND street = ? AND postcode = ? AND city = ? AND business_id = ? AND email = ? AND phone = ?";
     con.query(sql, [companyId, companyName, companyStreet, companyPostcode, companyCity, companyBusinessid, companyEmail, companyPhone], function (err, result) {
@@ -125,7 +158,8 @@ var getUpdate = function(companyId, companyName, companyStreet, companyPostcode,
     });
 };
 
-//UPDATE COMPANY
+/** Updates company's information.
+ * Gets from the client side new data and puts it to the database.*/
 app.post('/update', function (req, res) {
         var sql = "UPDATE companies SET name = '"+req.body.name+"', street = '"+req.body.street+"', postcode = '"+req.body.postcode+"', city = '"+req.body.city+"', business_id = '"+req.body.business_id+"', email = '"+req.body.email+"', phone = '"+req.body.phone+"' WHERE id = '"+req.body.id+"'";
         con.query(sql, [req.body.id, req.body.name, req.body.street, req.body.postcode, req.body.city, req.body.business_id, req.body.email, req.body.phone], function (err, result) {
@@ -136,7 +170,7 @@ app.post('/update', function (req, res) {
 });
 
 
-//DELETE COMPANY
+/**Delets company by ID */
 app.get('/delete/:id', function (req, res){
         var sql = "DELETE FROM companies WHERE id = ?";
         con.query(sql, [req.params.id], function (err, result) {
@@ -146,6 +180,7 @@ app.get('/delete/:id', function (req, res){
    res.redirect('/index');
 });
 
+/**Listens server at port 8080. */
 var server = app.listen(8080, function () {
     var host = server.address().address;
     var port = server.address().port;
