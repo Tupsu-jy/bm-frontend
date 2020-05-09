@@ -1,5 +1,7 @@
 import React from 'react';
-
+/**
+ * Headers for companies information.
+ */
 const Headers = (props) => {
 
     return (

@@ -1,0 +1,17 @@
+CREATE DATABASE `business`
+CREATE TABLE `companies` (
+	`id` INT NOT NULL,
+	`name` CHAR(50) NOT NULL DEFAULT '',
+	`street` CHAR(50) NOT NULL DEFAULT '',
+	`postcode` CHAR(50) NOT NULL DEFAULT '',
+	`city` CHAR(50) NOT NULL DEFAULT '',
+	`business_id` CHAR(50) NOT NULL DEFAULT '',
+	`email` CHAR(50) NOT NULL DEFAULT '',
+	`phone` CHAR(50) NULL DEFAULT '',
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+;
+INSERT INTO `business`.`companies` (`id`, `name`, `street`, `postcode`, `city`, `business_id`, `email`, `phone`) VALUES ('1', 'Business Solutions Oy', 'Fredrikinkatu 51', '00100', 'Helsinki', 'business.solutions@gmail.com', '040-4567788');
+INSERT INTO `business`.`companies` (`id`, `name`, `street`, `postcode`, `city`, `business_id`, `email`, `phone`) VALUES ('2', 'Techno Polis Oy', 'Karamalmintie 3', '27640', 'Espoo', '146789-9', 'techno.polis@gmail.com', '050-4788766');
+INSERT INTO `business`.`companies` (`id`, `name`, `street`, `postcode`, `city`, `business_id`, `email`, `phone`) VALUES ('3', 'Media Innovation Oy', 'Aleksanterinkatu 4', '56800', 'Tampere', '287568-3', 'media.innovation@gmail.com', '045-8879323');

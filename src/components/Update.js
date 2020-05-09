@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import CompaniesService from './CompaniesService';
-import Validator from './Validator';
+import React, { useState } from 'react';
+import CompaniesService from '../services/CompaniesService';
+import Validator from '../services/Validator';
 
+/**
+ * Form for updating companies in both to database and frontend list simultaneously.
+ * @param props
+ * @param props.show - determines if this component should be shown
+ * @param props.company - company that is to be updated
+ */
 const Update = (props) => {
-    //console.log("updatessa"+props.company)
 
     const [name, setName] = useState(props.company.name)
     const [business_id, setBusiness_id] = useState(props.company.business_id)
@@ -13,8 +18,11 @@ const Update = (props) => {
     const [email, setEmail] = useState(props.company.email)
     const [phone, setPhone] = useState(props.company.phone)
 
+    /**
+     * Validates the new updated values and if it passes then updates it both in database and 
+     * frontend list simultaneously. Creates a popup alert with error message if validation fails
+     */
     const validateAndPost = () => {
-
         let answer=Validator.validate(name,business_id,street,postcode,city,email,phone)
         if(answer==""){
             CompaniesService.update(name,business_id,street,postcode,city,email,phone,props.company.id)
@@ -23,13 +31,11 @@ const Update = (props) => {
         }else{
             alert(answer)
         }
-        
     }
 
     if (!props.show) {
         return null
     }
-
     return (
         <>
         <h3>Update Company</h3>

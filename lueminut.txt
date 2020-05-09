@@ -1,0 +1,54 @@
+REST-rajapinnan kutsut sekä niissä käytettävät json-muodot
+
+Kutsu ->
+app.get('/companies');
+sql = SELECT * from companies
+- GET metodi palauttaa osoitteeseen /companies kaikkien yritysten tiedot tietokannasta.
+- Lähettää osoitteeseen /companies seuraavanlaisen JSON-muodon
+{"numOfRows":3, "rows": 
+[{"id":1,"name":"Adminet Oy","street":"Korsontie
+8","postcode":"01820","city":"Vantaa","business_id":"2754123-4","email":"admin.net@gmail.com","phone":"041-9875675"},
+{"id":2,"name":"Work Solutions Oy","street":"Eerikinkatu 28","postcode":"53400","city":"Lappeenranta","business_id":"2189567-1","email":"work.solutions@gmail.com","phone":"041-7568788"},
+{"id":3,"name":"Master Europe Oy","street":"Fredrikinkatu20","postcode":"00120","city":"Helsinki","business_id":"2478312-5","email":"master.europe@gmail.com","phone":"050-6767895"}]}
+
+Kutsu ->
+app.get('/create');
+sql = SELECT MAX(id)+1 AS id FROM companies;
+- GET metodi palauttaa osoitteeseen /create tietokannan maksimi-id:n arvon lisättynä yhdellä.
+- Lähettää osoitteeseen /create seuraavanlaisen JSON-muodon
+{"numOfRows":1, "rows": [{"id":4}]}
+
+Kutsu ->
+app.post('/create');
+sql = INSERT INTO companies(id, name, street, postcode, city, business_id, email, phone) values(?,?,?,?,?,?,?,?);
+- POST metodi luo uuden yrityksen tietokantaan osoitteen /create pyynnössä lähetettävän datan pohjalta.
+
+Kutsu ->
+app.get('/select/:id/:name/:street/:postcode/:city/:business_id/:email/:phone);
+sql = SELECT * from companies WHERE id = ? AND name = ? AND street = ? AND postcode = ? AND city = ? AND business_id = ? AND email = ? AND phone = ?;
+- GET metodi palauttaa valitun yrityksen kaikki tiedot osoitteeseen /select/:id/:name/:street/:postcode/:city/:business_id/:email/:phone, missä 
+:id on yksilöivä tunniste,
+:name - yrityksen nimi,
+:street - yrityksen katuosoite,
+:postcode - yrityksen postinumero,
+:city - yrityksen kaupunki,
+:business_id - yrityksen y-tunnus,
+:email - yrityksen sähköpostiosoite,
+:phone - yrityksen puhelinnumero.
+
+Kutsu ->
+app.post('/update');
+sql = UPDATE companies SET name = '"+req.body.name+"', street = '"+req.body.street+"', postcode = '"+req.body.postcode+"', city = '"+req.body.city+"', business_id = '"+req.body.business_id+"', email = '"+req.body.email+"', phone = '"+req.body.phone+"' WHERE id = '"+req.body.id+"'";
+- POST metodi päivittää valitun yrityksen tiedot tietokantaan osoitteen /update pyynnössä lähetettävän datan pohjalta.
+
+Kutsu ->
+app.get('delete/:id');
+sql = DELETE FROM companies WHERE id = ?;
+- GET metodi poistaa sql-komennolla valitun yrityksen id perusteella osoitteessa /delete/:id, missä :id on yrityksen yksilöivä tunnus.
+
+
+
+
+
+
+

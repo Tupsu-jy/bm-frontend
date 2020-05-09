@@ -6,10 +6,8 @@ let rp='^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{3,50}$'
 var regPhone=new RegExp(rp)
 
 const setCompanies = (appCompanies) => {
-    console.log("setter" + appCompanies)
     companies = appCompanies
 }
-
 
 function lengthTest(min, max, str){
     if(str.length<=max && str.length>=min)
@@ -18,6 +16,17 @@ function lengthTest(min, max, str){
         return false
 }
 
+/**
+ * Validates given values and if they do not pass add relevant error messages to return value
+ * @param name 
+ * @param business_id 
+ * @param street 
+ * @param postcode 
+ * @param city 
+ * @param email 
+ * @param phone 
+ * @param update 
+ */
 function validate(name, business_id, street, postcode, city, email, phone, update) {
     let answer = ""
 
@@ -62,6 +71,9 @@ function uniquenessTest(name,business_id){
     return answer
 }
 
+/**
+ * Returns number that is one bigger than biggest id in list of companies
+ */
 function createUniqueId(){
     if(companies.length==0)
         return 1

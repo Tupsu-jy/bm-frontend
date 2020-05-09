@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import CompaniesService from './CompaniesService';
-import Validator from './Validator';
+import React, { useState } from 'react';
+import CompaniesService from '../services/CompaniesService';
+import Validator from '../services/Validator';
 
 
-
+/**
+ * Form for creating new conpanies and adding them both to database and frontend list
+ * simultaneously
+ * @param props.show - determines if this component should be shown
+ * @param  props.addCompany - Adds the company given in parameters to frontends internal company list
+ */
 const Create = (props) => {
 
     const [name, setName] = useState('')
@@ -14,8 +19,11 @@ const Create = (props) => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
 
+    /**
+     * Validates the new company and if it passes then adds it both to database and 
+     * frontend list simultaneously. Creates a popup alert with error message if validation fails
+     */
     const validateAndPost = () => {
-
         let answer=Validator.validate(name,business_id,street,postcode,city,email,phone)
         if(answer==""){
             let id=Validator.createUniqueId()
@@ -24,16 +32,11 @@ const Create = (props) => {
         }else{
             alert(answer)
         }
-        
-        
     }
 
     if (!props.show) {
         return null
     }
-
-
-
     return (
         <>
             <h3>Create New Company</h3>
@@ -86,7 +89,6 @@ const Create = (props) => {
                     Submit
                 </button>
             </div>
-
         </>
     )
 }

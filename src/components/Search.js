@@ -3,7 +3,15 @@ import Company from './Company';
 import Headers from './Headers';
 
 
-
+/**
+ * Renders 3 input fields for searching for companies and also renders all companies that meet 
+ * the search term put into them
+ * @param  props 
+ * @param  props.show - determines if this component should be shown
+ * @param  props.companies - frontend list of companies
+ * @param  props.removeCompany - removes company from frontend list of companies
+ * @param  props.updateButton - sets the page to update and companyUpdate to company given as parameter
+ */
 const Search = (props) => {
 
     const { companies } = props;
@@ -51,17 +59,3 @@ const Search = (props) => {
 }
 
 export default Search
-/*
-<p>search by name:</p>
-<input
-    onChange={e => showFilteredByName(e.target.value.toLowerCase())}
-/>
-<p>search by city:</p>
-<input
-    onChange={e => showFilteredByCity(e.target.value.toLowerCase())}
-/>
-<p>search by business id:</p>
-<input
-    onChange={e => showFilteredById(e.target.value)}
-/>
-*/

@@ -1,20 +1,25 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:8080'
-//toteutus kesken mutta idea koossa
-/*let companies = "";
 
-const setCompanies=(appCompanies)=>{
-    companies=appCompanies
-}
-
-function findUniqueId(){
-
-}
-*/
+/**
+ * Gets the json representation of all companies from database thru the
+ * rest api
+ */
 const getAll = () => {
     return axios.get(baseUrl + "/companies")
 }
 
+/**
+ * Adds a new company to database
+ * @param name 
+ * @param business_id 
+ * @param street 
+ * @param postcode 
+ * @param city 
+ * @param email 
+ * @param phone 
+ * @param id 
+ */
 const create = (name,business_id,street,postcode,city,email,phone,id) => {
 
     axios.post(baseUrl+"/create",{
@@ -33,9 +38,19 @@ const create = (name,business_id,street,postcode,city,email,phone,id) => {
     .catch(function (error) {
         console.log(error);
     });
-
 }
 
+/**
+ * Updates a company in database
+ * @param  name 
+ * @param  business_id 
+ * @param  street 
+ * @param  postcode 
+ * @param  city 
+ * @param  email 
+ * @param  phone 
+ * @param  id 
+ */
 const update = (name,business_id,street,postcode,city,email,phone,id) => {
     axios.post(baseUrl+"/update",{
         name: name,
@@ -55,6 +70,10 @@ const update = (name,business_id,street,postcode,city,email,phone,id) => {
     });
 }
 
+/**
+ * Removes given company from database
+ * @param id - id of comapny to delete
+ */
 const del = (id) => {
     console.log(baseUrl + "/delete/" + id)
     return axios.get(baseUrl + "/delete/" + id)
